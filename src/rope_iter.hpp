@@ -1,5 +1,5 @@
-#ifndef DAEDALUS_ROPE_ITER_H
-#define DAEDALUS_ROPE_ITER_H
+#ifndef ROPE_ROPE_ITER_H
+#define ROPE_ROPE_ITER_H
 
 #import <list>
 
@@ -9,7 +9,7 @@ using std::list;
 using std::function;
 using std::shared_ptr;
 
-namespace Daedalus {
+namespace Rope {
     /**
      *  Forward-declare RopeNode so that the iterator can access it.
      */
@@ -331,4 +331,4 @@ namespace Daedalus {
     };
 };
 
-#endif // DAEDALUS_ROPE_ITER_H
+#endif // ROPE_ROPE_ITER_H

@@ -1,5 +1,5 @@
-#ifndef DAEDALUS_MEASURE_H
-#define DAEDALUS_MEASURE_H
+#ifndef ROPE_MEASURE_H
+#define ROPE_MEASURE_H
 
 #import <functional>
 
@@ -7,7 +7,7 @@
 
 using std::function;
 
-namespace Daedalus {
+namespace Rope {
 
     /**
      *  Structure used to provide monoid-style operations for rope measurements
@@ -133,4 +133,4 @@ namespace Daedalus {
     };
 };
 
-#endif // DAEDALUS_MEASURE_H
+#endif // ROPE_MEASURE_H

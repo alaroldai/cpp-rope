@@ -1,7 +1,7 @@
-#ifndef DAEDALUS_ROPE_NODE_TYPE_H
-#define DAEDALUS_ROPE_NODE_TYPE_H
+#ifndef ROPE_ROPE_NODE_TYPE_H
+#define ROPE_ROPE_NODE_TYPE_H
 
-namespace Daedalus {
+namespace Rope {
     /**
      *  Represents the node type of a rope node
      */
@@ -11,4 +11,4 @@ namespace Daedalus {
     };
 }
 
-#endif // DAEDALUS_ROPE_NODE_TYPE_H
+#endif // ROPE_ROPE_NODE_TYPE_H

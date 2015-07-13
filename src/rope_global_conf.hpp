@@ -1,13 +1,11 @@
-#ifndef DAEDALUS_ROPE_GLOBAL_CONF_H
-#define DAEDALUS_ROPE_GLOBAL_CONF_H
+#ifndef ROPE_ROPE_GLOBAL_CONF_H
+#define ROPE_ROPE_GLOBAL_CONF_H
 
 #import <unistd.h>
 
-namespace Daedalus
+namespace Rope
 {
-//    static uintptr_t ROPE_GLOBAL_MAX_LEAF_CAP = sysconf(_SC_PAGESIZE);
-//    static uintptr_t ROPE_GLOBAL_MAX_LEAF_CAP = 0x1000;
-    static uintptr_t ROPE_GLOBAL_MAX_LEAF_CAP = 256;
+    static uintptr_t ROPE_GLOBAL_MAX_LEAF_CAP = sysconf(_SC_PAGESIZE);
 }
 
-#endif // DAEDALUS_ROPE_GLOBAL_CONF_H
+#endif // ROPE_ROPE_GLOBAL_CONF_H

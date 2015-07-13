@@ -1,5 +1,5 @@
-#ifndef DAEDALUS_UTF8_H
-#define DAEDALUS_UTF8_H
+#ifndef ROPE_UTF8_H
+#define ROPE_UTF8_H
 
 #import <cstdint>
 #import <memory>
@@ -7,7 +7,7 @@
 #import "measure.hpp"
 #import "slice.hpp"
 
-namespace Daedalus {
+namespace Rope {
 
     /**
      *  Represents a measure of a number of UTF8-encoded characters,

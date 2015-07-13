@@ -5,7 +5,7 @@
 #import <iostream>
 #import <cassert>
 
-namespace Daedalus {
+namespace Rope {
 
     UTF8Measure::UTF8Measure()
     {

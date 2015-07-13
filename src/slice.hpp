@@ -12,7 +12,7 @@
 #import <vector>
 #import <list>
 
-namespace Daedalus {
+namespace Rope {
     
 
     /**

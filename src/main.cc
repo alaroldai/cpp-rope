@@ -9,6 +9,8 @@
 
 #import "utf8.hpp"
 
+#define ROPE_TEST_PRINT 1
+
 using std::shared_ptr;
 using std::dynamic_pointer_cast;
 using std::cout;
@@ -21,16 +23,14 @@ using std::ifstream;
 using std::string;
 using std::cerr;
 
-#define DAEDALUS_TEST_PRINT true
+using UTF8Measure = Rope::UTF8Measure;
 
-using UTF8Measure = Daedalus::UTF8Measure;
-
-using CRope = Daedalus::Rope<
+using CRope = Rope::Rope<
     char,
-    Daedalus::Measure<char>>;
+    Rope::Measure<char>>;
 
-using GenericMeasureCallbacks = Daedalus::MeasureCallbacks<shared_ptr<Daedalus::Measure<char>>, char>;
-using GenericIteratorCallbacks = Daedalus::IteratorCallbacks<shared_ptr<Daedalus::Measure<char>>, char>;
+using GenericMeasureCallbacks = Rope::MeasureCallbacks<shared_ptr<Rope::Measure<char>>, char>;
+using GenericIteratorCallbacks = Rope::IteratorCallbacks<shared_ptr<Rope::Measure<char>>, char>;
 
 GenericMeasureCallbacks callbacks = GenericMeasureCallbacks(
     GenericMeasureCallbacks::lift_join(UTF8Measure::add),
@@ -44,15 +44,15 @@ GenericIteratorCallbacks iterCallbacks(
 );
 
 
-auto getCount = [](shared_ptr<Daedalus::Measure<char>> const &m) {
-    return Daedalus::UTF8Measure::getCount(dynamic_pointer_cast<Daedalus::UTF8Measure>(m));
+auto getCount = [](shared_ptr<Rope::Measure<char>> const &m) {
+    return Rope::UTF8Measure::getCount(dynamic_pointer_cast<Rope::UTF8Measure>(m));
 };
 
 void raw_index_test(CRope rope)
 {
     int i = 0;
     for (auto it = rope.begin(iterCallbacks); it < rope.end(iterCallbacks); ++it, ++i) {
-        if (DAEDALUS_TEST_PRINT) {
+        if (ROPE_TEST_PRINT) {
             cout << "raw index of character at index " << i << ": " << it.raw_index() << endl;
         }
     }
@@ -66,7 +66,7 @@ void split_after_test(CRope rope)
         assert(it == expected);
         auto split = rope.splitAfter(it, callbacks);
         auto lhs = get<0>(split), rhs = get<1>(split);
-        if (DAEDALUS_TEST_PRINT) {
+        if (ROPE_TEST_PRINT) {
             cout << "split after begin + " << i << ":\t\"" << lhs << "\" -> \"" << rhs << "\"" << endl;
         }
     }
@@ -78,7 +78,7 @@ uintptr_t split_before_test(CRope rope)
     for (auto it = rope.begin(iterCallbacks); it < rope.end(iterCallbacks); ++it, ++i) {
         it.push_to_leaf();
         auto split = rope.splitBefore(it, callbacks);
-        if (DAEDALUS_TEST_PRINT) {
+        if (ROPE_TEST_PRINT) {
             cout << "Split before index " << i << ": \"";
             cout << get<0>(split) << "\" -> \"" << get<1>(split) << "\"" << endl;
         }
@@ -90,7 +90,7 @@ void split_and_concat_tests(CRope rope)
 {
     for (auto it = rope.begin(iterCallbacks); it < rope.end(iterCallbacks); ++it) {
         auto split = rope.splitBefore(it, callbacks);
-        if (DAEDALUS_TEST_PRINT) {
+        if (ROPE_TEST_PRINT) {
             cout << get<0>(split) << " + " << get<1>(split) << " -> " << get<0>(split).concat(get<1>(split), callbacks) << endl;
         }
     }
@@ -100,7 +100,7 @@ void build_by_concat_tests(CRope rope)
 {
     for (char c = 'a'; c != 'z' + 1; ++c) {
         rope = rope.concat(CRope((ostringstream() << c).str(), callbacks), callbacks).balance(callbacks);
-        if (DAEDALUS_TEST_PRINT) {
+        if (ROPE_TEST_PRINT) {
             cout << rope << endl;
         }
     }
@@ -109,7 +109,7 @@ void build_by_concat_tests(CRope rope)
         auto s = (ostringstream() << i).str();
         auto rhs = CRope(s, callbacks);
         auto result = rope.concat(rhs, callbacks).balance(callbacks);
-        if (DAEDALUS_TEST_PRINT) {
+        if (ROPE_TEST_PRINT) {
             cout << rope << " + " << rhs << " -> " << result << endl;
         }
         rope = result;
@@ -119,7 +119,7 @@ void build_by_concat_tests(CRope rope)
 void split_after_end_test(CRope rope)
 {
     auto split = rope.splitAfter(rope.end(iterCallbacks), callbacks);
-    if (DAEDALUS_TEST_PRINT) {
+    if (ROPE_TEST_PRINT) {
         cout << "Split after end: \"" << get<0>(split) << "\" -> \"" << get<1>(split) << "\"" << endl;
     }
 }
@@ -135,7 +135,6 @@ void tests_with_rope(CRope rope)
 
 void run_tests()
 {
-//    string msg = u8"Hello, Daedalus! This is a very long string Hello, Daedalus! This is a very long string hello";
     string msg = u8"インターネットに接続していることを確認し";
     
     CRope rope(msg, callbacks);
@@ -152,8 +151,8 @@ void speed_test()
 
     cout << "numSplits, elapsed, elapsed / numSplits" << endl;
 
-    while (s.size() < Daedalus::ROPE_GLOBAL_MAX_LEAF_CAP * 4) {
-        cerr << (double)s.size() * 100 / (double)(Daedalus::ROPE_GLOBAL_MAX_LEAF_CAP * 4) << endl;
+    while (s.size() < Rope::ROPE_GLOBAL_MAX_LEAF_CAP * 4) {
+        cerr << (double)s.size() * 100 / (double)(Rope::ROPE_GLOBAL_MAX_LEAF_CAP * 4) << endl;
 
         CRope rope(s, callbacks);
         rope.balance(callbacks);

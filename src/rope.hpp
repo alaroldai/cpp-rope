@@ -1,5 +1,5 @@
-#ifndef DAEDALUS_ROPE_HEADER
-#define DAEDALUS_ROPE_HEADER
+#ifndef ROPE_ROPE_HEADER
+#define ROPE_ROPE_HEADER
 
 #import <memory>
 #import <functional>
@@ -16,8 +16,8 @@ using std::endl;
 using std::tuple;
 using std::make_tuple;
 
-namespace Daedalus {
-    
+namespace Rope {
+
     template<typename Item, typename MeasureType>
     class Rope {
     private:
@@ -119,7 +119,7 @@ namespace Daedalus {
         typename    MeasureType>
         ostream &operator<<
     (   ostream &lhs,
-        Daedalus::Rope<Item, MeasureType> const &rhs)
+        Rope<Item, MeasureType> const &rhs)
     {
         auto it = rhs.begin_items();
         auto end = rhs.end_items();
@@ -132,5 +132,5 @@ namespace Daedalus {
     }
 };
 
-#endif // DAEDALUS_ROPE_HEADER
+#endif // ROPE_ROPE_HEADER
 

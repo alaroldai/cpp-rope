@@ -1,5 +1,5 @@
-#ifndef DAEDALUS_ROPE_NODE_HEADER
-#define DAEDALUS_ROPE_NODE_HEADER
+#ifndef ROPE_ROPE_NODE_HEADER
+#define ROPE_ROPE_NODE_HEADER
 
 #import <memory>
 #import <functional>
@@ -27,7 +27,7 @@ using std::tuple;
 using std::cout;
 using std::endl;
 
-namespace Daedalus {
+namespace Rope {
     template<
         typename    Item,
         typename    MeasureType>
@@ -559,4 +559,4 @@ namespace Daedalus {
     };
 };
 
-#endif // DAEDALUS_ROPE_NODE_HEADER
+#endif // ROPE_ROPE_NODE_HEADER
