@@ -1,0 +1,3 @@
+*.build
+.ycm_diags
+.compile_commands
