@@ -20,7 +20,7 @@ set(srcs
     src/utf8.cc
     src/measure.hpp)
 
-add_library(rope STATIC
+add_library(rope SHARED
     ${srcs}
 )
 
